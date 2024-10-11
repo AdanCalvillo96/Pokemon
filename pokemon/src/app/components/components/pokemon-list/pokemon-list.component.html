@@ -1,0 +1,41 @@
+<!-- Container Gnral -->
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-3" *NgFor="let pokemon of pokemons">
+        <div class="card mb-3" (click)="openModal(pokemon)">
+          <div class="card-body">
+            <h5 class="card-title">{{ pokemon.name | titlecase }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Flechas -->
+    <button (click)="prevPage()" class="btn btn-primary" [disabled]="offset === 0">Anterior</button>
+    <button (click)="nextPage()" class="btn btn-primary" [disabled]="offset + limit >= totalPokemons">Siguiente</button>
+<!-- Modal --> 
+    <div class="modal fade" id="pokemonModal" tabindex="-1" role="dialog" aria-labelledby="pokemonModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pokemonModalLabel">{{ selectedPokemon?.name }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img [src]="selectedPokemon?.sprites.front_default" class="img-fluid" alt="{{ selectedPokemon?.name }}">
+            <p><strong>Tipo:</strong> {{ selectedPokemon?.types[0]?.type.name }}</p>
+            <p><strong>HP:</strong> {{ selectedPokemon?.stats[0]?.base_stat }}</p>
+            <p><strong>Ataque:</strong> {{ selectedPokemon?.stats[1]?.base_stat }}</p>
+            <p><strong>Defensa:</strong> {{ selectedPokemon?.stats[2]?.base_stat }}</p>
+            <p><strong>Ataque Especial:</strong> {{ selectedPokemon?.stats[3]?.base_stat }}</p>
+            <p><strong>Defensa Especial:</strong> {{ selectedPokemon?.stats[4]?.base_stat }}</p>
+            <p><strong>Velocidad:</strong> {{ selectedPokemon?.stats[5]?.base_stat }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
